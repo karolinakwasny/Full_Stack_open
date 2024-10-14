@@ -3,7 +3,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note over Browser, Server: A user is adding a message and clicking the button
+    Note over browser, server: A user is adding a message and clicking the button
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
@@ -17,7 +17,7 @@ sequenceDiagram
     server-->>browser: HTML document
     deactivate server
 
-    Note over Browser, Server: The reload causes three more HTTP requests
+    Note over browser, server: The reload causes three more HTTP requests
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
