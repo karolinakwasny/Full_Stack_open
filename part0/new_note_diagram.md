@@ -3,15 +3,21 @@ sequenceDiagram
     participant browser
     participant server
 
+    Note right of browser: A user is adding a message and clicking the button
+
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: HTML document
+    server-->>browser: URL request
     deactivate server
+
+    Note right of browser: Server requested a HTTP GET request to the address defined in the header's: https://studies.cs.helsinki.fi/exampleapp/notes
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
     deactivate server
+
+    Note right of browser:The reload causes three more HTTP requests
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
