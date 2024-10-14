@@ -10,7 +10,7 @@ sequenceDiagram
     server-->>browser: URL redirect
     deactivate server
 
-    Note right of server: server asks the browser to perform a new HTTP GET request
+    Note left of server: server asks the browser to perform a new HTTP GET request
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
