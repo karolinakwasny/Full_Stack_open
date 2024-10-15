@@ -13,5 +13,5 @@ sequenceDiagram
     server-->>browser: JavaScript code
     deactivate server
 
-    Note right of browser: browser tackles this task by executing the JavaScript code it fetched from the server
+    Note right of browser: browser executes the JavaScript code it fetched from the server
 ```
