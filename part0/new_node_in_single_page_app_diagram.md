@@ -5,7 +5,7 @@ sequenceDiagram
 
     Note right of browser: A user is adding a message and clicking the button
 
-    Note right of browser: browser executes the JavaScript code it fetched from the server
+    Note right of browser: browser renders page with the new node
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
     activate server
 
