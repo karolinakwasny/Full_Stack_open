@@ -8,7 +8,7 @@ sequenceDiagram
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
 
-    Note left of server: server can access the data, creates a new note object, and adds it to an array called notes
+    Note left of server: server can access the data, creates a new note object and adds it to an array called notes
 
     server-->>browser: URL redirect
     deactivate server
