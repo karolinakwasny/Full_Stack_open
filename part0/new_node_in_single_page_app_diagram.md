@@ -5,13 +5,12 @@ sequenceDiagram
 
     Note right of browser: A user is adding a message and clicking the button
 
+    Note right of browser: browser executes the JavaScript code it fetched from the server
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
     activate server
 
     Note right of browser: In Content-Type header of the request it informs server that the included data is represented in JSON format
 
-    server-->>browser: JavaScript code
-    deactivate server
+    Note left of server: server is updated
 
-    Note right of browser: browser executes the JavaScript code it fetched from the server
 ```
