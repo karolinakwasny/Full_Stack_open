@@ -3,15 +3,26 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: A user is adding a message and clicking the button
+    Note right of browser: user goes to the single-page app
 
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
     activate server
-
-    Note right of browser: In Content-Type header of the request it informs server that the included data is represented in JSON format
-
-    server-->>browser: JavaScript code
+    server-->>browser: HTML document
     deactivate server
 
-    Note right of browser: browser executes the JavaScript code it fetched from the server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
 ```
