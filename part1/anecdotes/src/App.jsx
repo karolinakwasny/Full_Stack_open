@@ -18,9 +18,14 @@ const Button = (props) => {
 
 const Anecdote = (props) => {
   return (
-    <div>
-      {props.anecdote}
-    </div>
+    <>
+      <div>
+        {props.anecdote}
+      </div>
+      <div>
+        has {props.index} votes
+      </div>
+    </>
   )
 }
 
@@ -35,20 +40,19 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+  const numberOfAnecdotes = anecdotes.length
 
   const [selected, setSelected] = useState(0)
-  const numberOfAnecdotes = anecdotes.length
   const [points, setPoints] = useState(Array(numberOfAnecdotes).fill(0));
   const [indexfav, setFav] = useState(0)
 
-
-  const generateRandomNumber = () => {
-    const n = numberOfAnecdotes
-    return Math.floor(Math.random() * n);
+  const generateRandomIndex = () => {
+    const index = numberOfAnecdotes
+    return Math.floor(Math.random() * index);
   };
 
   const handleClick = () => {
-    setSelected(generateRandomNumber())
+    setSelected(generateRandomIndex())
   }
 
   const getMaxIndex = (copyPoints) => {
@@ -67,14 +71,11 @@ const App = () => {
   return (
     <div>
       <Header text='Anecdote of the day'/>
-      <Anecdote anecdote={anecdotes[selected]}/>
+      <Anecdote anecdote={anecdotes[selected]} index={points[selected]}/>
       <Button handleOnClick={handleVote} text='vote'/>
       <Button handleOnClick={handleClick} text='next anecdote'/>
       <Header text='Anecdote with most votes'/>
-      <Anecdote anecdote={anecdotes[indexfav]}/>
-      {/* <div>
-        array {points}
-      </div> */}
+      <Anecdote anecdote={anecdotes[indexfav]} index={points[indexfav]}/>
     </div>
   )
 }
