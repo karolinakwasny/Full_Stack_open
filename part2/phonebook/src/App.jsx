@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import personService from './services/persons'
 
 const Person = ({ person, deleteThePerson }) => {
@@ -85,13 +84,13 @@ const App = () => {
         .create(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          setNewName('')
-          setNewNumber('')
         })
         .catch(error => {
           alert(`Failed to add '${personObject.name}'`);
         })
     }
+    setNewName('')
+    setNewNumber('')
   }
 
   const handleNewName = (event) => {
@@ -121,14 +120,13 @@ const App = () => {
         .deletePerson(id)
         .then(() => {
           setPersons(persons.filter(n => n.id !== id))
-      })
-
-      .catch(error => {
-        alert(
-          `the person '${person.name}' was already deleted from server`
-        )
-        setPersons(persons.filter(n => n.id !== id))
-      })
+          })
+          .catch(error => {
+            alert(
+              `the person '${person.name}' was already deleted from server`
+            )
+            setPersons(persons.filter(n => n.id !== id))
+          })
     }
   }
 
@@ -141,13 +139,11 @@ const App = () => {
         .update(id, changedPerson)
         .then((returnedPerson) => {
           setPersons(persons.map(n => n.id === id ? returnedPerson : n))
-      })
-      .catch(error => {
-        alert(
-          `Failed to update number for '${person.name}'`
-        )
-        setPersons(persons.filter(n => n.id !== id))
-      })
+          })
+          .catch(error => {
+            alert(`Failed to update number for '${person.name}'`)
+            setPersons(persons.filter(n => n.id !== id))
+          })
     }
   }
 
