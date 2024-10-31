@@ -89,6 +89,9 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+        .catch(error => {
+          alert(`Failed to add '${personObject.name}'`);
+        })
     }
   }
 
@@ -132,6 +135,7 @@ const App = () => {
   const changeTheNumber = (id) => {
     const person = persons.find(n => n.id === id)
     const changedPerson = { ...person, number: newNumber}
+
     if (window.confirm(`${person.name} is already added to phonebook, replace the old number with a new one?`)){
       personService
         .update(id, changedPerson)
@@ -140,7 +144,7 @@ const App = () => {
       })
       .catch(error => {
         alert(
-          `the person '${person.name}' was already deleted from server`
+          `Failed to update number for '${person.name}'`
         )
         setPersons(persons.filter(n => n.id !== id))
       })
