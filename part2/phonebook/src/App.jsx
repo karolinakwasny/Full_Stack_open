@@ -69,7 +69,6 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: String(persons.length + 1),
     }
     const objectExists = persons.find(item => item.name === newName)
 
@@ -123,6 +122,7 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter(n => n.id !== id))
       })
+
       .catch(error => {
         alert(
           `the person '${person.name}' was already deleted from server`
