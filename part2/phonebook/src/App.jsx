@@ -71,17 +71,25 @@ const App = () => {
       number: newNumber,
       id: String(persons.length + 1),
     }
-    if (persons.some(item => item.name === newName))
-      window.alert(`${newName} is already added to phonebook`)
+    const objectExists = persons.find(item => item.name === newName)
+
+    if (objectExists){
+      if (objectExists.number === newNumber){
+        window.alert(`${newName} is already added to phonebook`)
+      }
+      else{
+        changeTheNumber(objectExists.id)
+      }
+    }
     else{
       personService
         .create(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
         })
     }
-    setNewName('')
-    setNewNumber('')
   }
 
   const handleNewName = (event) => {
@@ -106,11 +114,29 @@ const App = () => {
   const deleteThePerson = (id) => {
     const person = persons.find(n => n.id === id)
 
-    if (window.confirm(`Delete ${person.name}?`)){
+    if (window.confirm(`Are you sure you want to delete ${person.name}?`)){
       personService
         .deletePerson(id)
         .then(() => {
           setPersons(persons.filter(n => n.id !== id))
+      })
+      .catch(error => {
+        alert(
+          `the person '${person.name}' was already deleted from server`
+        )
+        setPersons(persons.filter(n => n.id !== id))
+      })
+    }
+  }
+
+  const changeTheNumber = (id) => {
+    const person = persons.find(n => n.id === id)
+    const changedPerson = { ...person, number: newNumber}
+    if (window.confirm(`${person.name} is already added to phonebook, replace the old number with a new one?`)){
+      personService
+        .update(id, changedPerson)
+        .then((returnedPerson) => {
+          setPersons(persons.map(n => n.id === id ? returnedPerson : n))
       })
       .catch(error => {
         alert(
