@@ -1,6 +1,28 @@
 import { useState, useEffect } from 'react'
 import personService from './services/persons'
 
+const Notification = ({ message, success }) => {
+  if (message === null) {
+    return null;
+  }
+
+  const notificationStyle = {
+    color: success ? 'green' : 'red',
+    backgroundColor: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  };
+
+  return (
+    <div style={notificationStyle}>
+      {message}
+    </div>
+  );
+};
+
 const Person = ({ person, deleteThePerson }) => {
   const label = 'delete'
 
@@ -54,6 +76,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filtered, setFilter] = useState('')
+  const [notification, setNotification] = useState({ message: null, success: true })
 
   useEffect(() => {
     personService
@@ -84,6 +107,10 @@ const App = () => {
         .create(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setNotification({
+            message: `Added ${newName} `,
+            success: true,
+          })
         })
         .catch(error => {
           alert(`Failed to add '${personObject.name}'`);
@@ -139,10 +166,17 @@ const App = () => {
         .update(id, changedPerson)
         .then((returnedPerson) => {
           setPersons(persons.map(n => n.id === id ? returnedPerson : n))
+          setNotification({
+            message: `${person.name} changed his/her number`,
+            success: true,
+          })
           })
           .catch(error => {
-            alert(`Failed to update number for '${person.name}'`)
             setPersons(persons.filter(n => n.id !== id))
+            setNotification({
+              message: `Information of ${person.name} has already been removed from the server`,
+              success: false,
+            })
           })
     }
   }
@@ -150,6 +184,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification.message} success={notification?.success} />
       <Filter type="text" value={filtered} onChange={handleSearch}/>
       <h3>add a new</h3>
       <PersonForm newName={newName}
