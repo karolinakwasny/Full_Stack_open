@@ -111,6 +111,9 @@ const App = () => {
             message: `Added ${newName} `,
             success: true,
           })
+          setTimeout(() => {
+            setNotification({ message: null, success: true })
+          }, 5000)
         })
         .catch(error => {
           alert(`Failed to add '${personObject.name}'`);
@@ -170,14 +173,20 @@ const App = () => {
             message: `${person.name} changed his/her number`,
             success: true,
           })
+          setTimeout(() => {
+            setNotification({ message: null, success: true })
+          }, 5000)
+        })
+        .catch(error => {
+          setPersons(persons.filter(n => n.id !== id))
+          setNotification({
+            message: `Information of ${person.name} has already been removed from the server`,
+            success: false,
           })
-          .catch(error => {
-            setPersons(persons.filter(n => n.id !== id))
-            setNotification({
-              message: `Information of ${person.name} has already been removed from the server`,
-              success: false,
-            })
-          })
+          setTimeout(() => {
+            setNotification({ message: null, success: true })
+          }, 5000)
+        })
     }
   }
 
