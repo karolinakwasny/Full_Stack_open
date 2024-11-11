@@ -1,89 +1,12 @@
 import { useState, useEffect } from 'react'
+
 import countryService from './services/countries'
 import weatherService from './services/weather'
 
-const CountryName = ({ listOfNames , handleShow}) => {
-  return (
-    <div>
-      {listOfNames.name.common}
-      <button onClick={() => handleShow(listOfNames)}>show</button>
-    </div>
-  )
-}
-const PrintCountry = ({ country }) => {
-  return (
-    <div>
-      <h1>{country.name.common}</h1>
-      <div>
-        <div> capital {country.capital} </div><div> area {country.area} </div>
-      </div>
-      <h2>languages: </h2>
-      <ul>
-        {Object.values(country.languages).map((language, index) => <li key={index}>{language}</li>)}
-      </ul>
-      <figure style={{ margin: '0' }}>
-        <img src={country.flags.png}
-             alt={`flag of ${country.name.common}`}
-             style={{ display: 'block', maxWidth: '200px', height: 'auto', margin: '0' }}/>
-      </figure>
-    </div>
-  )
-}
+import Filter from './components/Filter'
+import Print from './components/Print'
 
-const PrintWeather = ({ weather, capital }) => {
-  if (!weather) {
-    return <div>No weather data available.</div>
-  }
-
-  const temp = weather.main.temp
-  const wind = weather.wind.speed
-  const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`
-
-  return (
-    <div>
-      <h2>Weather in {capital}</h2>
-      <div>Temperature {temp} Celcius</div>
-      {iconUrl && (
-        <img src={iconUrl} alt="Weather icon" style={{ width: '100px', height: 'auto' }} />
-      )}
-      <div>Wind {wind} m/s</div>
-    </div>
-  )
-}
-
-const Print =  ({filteredCountries, country, handleShow, weather}) => {
-  if (country){
-    return(
-      <div>
-        <PrintCountry country={country}/>
-        <PrintWeather weather={weather} capital={country.capital}/>
-      </div>
-    )
-  }
-  if (filteredCountries.length > 10){
-    return(<>Too many matches, specify another filter</>)
-  }
-  return (
-    <>
-      {filteredCountries.map(listOfNames =>
-        <CountryName key={listOfNames.ccn3} listOfNames={listOfNames} handleShow={handleShow}/>
-      )}
-    </>
-  )
-
-}
-
-const Filter = (props) => {
-  return (
-    <div> find countries
-      <input  type={props.type}
-              value={props.value}
-              onChange={props.onChange}/>
-    </div>
-  )
-}
-
-function App() {
+const App = () => {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState([])
   const [allCountires, setAllCountires] = useState([])

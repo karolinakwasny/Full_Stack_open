@@ -1,75 +1,10 @@
 import { useState, useEffect } from 'react'
 import personService from './services/persons'
 
-const Notification = ({ message, success }) => {
-  if (message === null) {
-    return null;
-  }
-
-  const notificationStyle = {
-    color: success ? 'green' : 'red',
-    backgroundColor: 'lightgrey',
-    fontSize: 20,
-    borderStyle: 'solid',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  };
-
-  return (
-    <div style={notificationStyle}>
-      {message}
-    </div>
-  );
-};
-
-const Person = ({ person, deleteThePerson }) => {
-  const label = 'delete'
-
-  return (
-    <div>{person.name} {person.number} <button onClick={deleteThePerson}>{label}</button> </div>
-  )
-}
-
-const Filter = (props) => {
-  return (
-    <div> filter shown with
-      <input  type={props.type}
-              value={props.value}
-              onChange={props.onChange}/>
-    </div>
-  )
-}
-
-const Field = ({ field, value, onChange }) => {
-  return (
-      <div>
-        {field}: <input value={value} onChange={onChange} />
-      </div>
-  )
-}
-
-const PersonForm  = ({ newName, newNumber, handleNewName, handleNewNumber, addPerson }) => {
-  return (
-    <form onSubmit={addPerson}>
-    <Field field="name" value={newName} onChange={handleNewName} />
-    <Field field="number" value={newNumber} onChange={handleNewNumber} />
-    <div>
-      <button type="submit">add</button>
-    </div>
-  </form>
-  )
-}
-
-const Persons =  ({ filteredPersons, deleteThePerson }) => {
-  return (
-    <>
-      {filteredPersons.map(person =>
-        <Person key={person.id} person={person} deleteThePerson={() => deleteThePerson(person.id)}/>
-      )}
-    </>
-  )
-}
+import Notification from './components/Notification'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])

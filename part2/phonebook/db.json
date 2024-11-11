@@ -2,68 +2,28 @@
   "persons": [
     {
       "id": "1",
-      "name": "hgdh",
-      "number": "45345"
+      "name": "Arto Hellas",
+      "number": "040-123456"
+    },
+    {
+      "id": "2",
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523"
     },
     {
       "id": "3",
-      "name": "dhdhg",
-      "number": "343"
-    },
-    {
-      "id": "7cdd",
-      "name": "gdgffg",
-      "number": "3434"
+      "name": "Dan Abramov",
+      "number": "12-43-234345"
     },
     {
       "id": "6bfc",
-      "name": "dfgdsgdf",
-      "number": "3243"
+      "name": "Karolina (me)",
+      "number": "791-876-187"
     },
     {
       "id": "2404",
-      "name": "ijijij",
-      "number": "234324"
-    },
-    {
-      "id": "b7af",
-      "name": "jfgjdg",
-      "number": "534343"
-    },
-    {
-      "id": "a3d1",
-      "name": "fgsg fdgdg",
-      "number": "2425"
-    },
-    {
-      "id": "7930",
-      "name": "dfdfg",
-      "number": "445"
-    },
-    {
-      "id": "b428",
-      "name": "ff",
-      "number": "5432"
-    },
-    {
-      "id": "807a",
-      "name": "gg",
-      "number": "42525"
-    },
-    {
-      "id": "de85",
-      "name": "yfyfy",
-      "number": "456"
-    },
-    {
-      "id": "dc2f",
-      "name": "ddd",
-      "number": "2333"
-    },
-    {
-      "id": "7041",
-      "name": "fd",
-      "number": "65432"
+      "name": "Santiago Tena",
+      "number": "69"
     }
   ]
 }
